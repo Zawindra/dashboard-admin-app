@@ -10,10 +10,10 @@ export const AuthProvider = ({ children }) => {
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
-  const login = (username, password) => {
+  const login = (email, password) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const validUser = users.find(
-      (u) => u.username === username && u.password === password
+      (u) => u.email === email && u.password === password
     );
     if (validUser) {
       setUser(validUser);
@@ -23,12 +23,12 @@ export const AuthProvider = ({ children }) => {
     return false;
   };
 
-  const register = (username, password) => {
+  const register = (email, password) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    if (users.find((u) => u.username === username)) {
-      return false; // username sudah ada
+    if (users.find((u) => u.email === email)) {
+      return false; // email sudah terdaftar
     }
-    const newUser = { username, password, role: "user" };
+    const newUser = { email, password, role: "user" };
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
     return true;

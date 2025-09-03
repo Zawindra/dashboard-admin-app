@@ -14,7 +14,7 @@ function MainApp() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364]">
         {/* Card login/register */}
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md"> 
           {page === "login" ? <Login setPage={setPage} /> : <Register setPage={setPage} />}
         </div>
       </div>

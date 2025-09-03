@@ -12,8 +12,8 @@ const Dashboard = () => {
     setUsers(storedUsers);
   }, []);
 
-  const handleDeleteUser = (username) => {
-    const newUsers = users.filter((u) => u.username !== username);
+  const handleDeleteUser = (email) => {
+    const newUsers = users.filter((u) => u.email !== email);
     setUsers(newUsers);
     localStorage.setItem("users", JSON.stringify(newUsers));
   };
@@ -25,7 +25,9 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] p-6 ">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-white">Welcome, {user.username}</h2>
+        <h2 className="text-2xl font-bold text-white">
+          Welcome, {user?.email}
+        </h2>
         <button
           onClick={logout}
           className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
@@ -44,9 +46,9 @@ const Dashboard = () => {
                 key={i}
                 className="flex justify-between bg-gray-50 p-2 rounded-lg"
               >
-                {u.username}
+                {u.email}
                 <button
-                  onClick={() => handleDeleteUser(u.username)}
+                  onClick={() => handleDeleteUser(u.email)}
                   className="text-red-500 hover:text-red-700"
                 >
                   Hapus
@@ -57,7 +59,8 @@ const Dashboard = () => {
         </div>
 
         {/* Dynamic Form */}
-        <DynamicForm onSubmit={handleFormSubmit} />
+        {/* <DynamicForm onSubmit={handleFormSubmit} /> */}
+        <DynamicForm onSubmit={handleFormSubmit} userEmail={user?.email} />
 
         {/* Hasil Data Form */}
         <div className="bg-white p-6 rounded-xl shadow-md md:col-span-2">
